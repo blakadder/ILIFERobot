@@ -14,6 +14,7 @@ All the hard work was done by https://github.com/ksya/ILIFERobot, I merely dabbl
 - adjust "S_BUSY" to catch spot and edge clean modes
 - battery calculator uses my battery values
 - add charging boolean since state is now only "docked"
+- add "Reboot ESP" option to webUI and `robot:reboot` command to restart NodeMCU
 
 Add WiFi capabilities to the ILIFE V5s using a NodeMCU or other ESP module. 
 Beware, this is not an easy project, since there is currently no known way to connect to a debug port or serial output.

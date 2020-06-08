@@ -29,7 +29,7 @@
 
 
 ## old version sensors
-sensor:
+#sensor:
 - platform: mqtt
   name: ILIFE status mqtt
   state_topic: "ilife-vacuum/state"
@@ -68,7 +68,7 @@ sensor:
   end: '{{ now() }}'
 
 
-binary_sensor:
+#binary_sensor:
 - platform: mqtt
   name: ILIFE docked
   state_topic: "ilife-vacuum/state"

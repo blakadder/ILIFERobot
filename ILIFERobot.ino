@@ -494,21 +494,19 @@ boolean doAction(const char* action) {
     return true;
   }
   else if(strcmp(action, "locate") == 0) {
-    if(robotStatus == S_BUSY || robotStatus == S_IDLE)
+    SendIRCode(rStart); //wake up first
+    delay(1000); //wait a bit
       for (int i = 0; i < 10; i++) {// Loop to beep n times
          SendIRCode_long(rLocate);
-         delay(1000);
+         delay(500);
          }
-    else if(robotStatus == S_SLEEP) {
+      if(robotStatus == S_BUSY)
       SendIRCode(rStart); //wake up first
-      delay(1000); //wait a bit
-      for (int i = 0; i < 10; i++) {// Loop to beep n times
-         SendIRCode_long(rLocate);
-         delay(1000);
-      }
-    }
+      else {
+           delay(500);
+        }
     return true;
-  }  
+  } 
   else {
     int buttonCmd = findValidRobotCmd(action);
     if(buttonCmd != -1) {
