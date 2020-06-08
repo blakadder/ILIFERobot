@@ -5,6 +5,7 @@ All the hard work was done by https://github.com/ksya/ILIFERobot, I merely dabbl
 - add hostname definition
 - separate MQTT topics for state and status to use HA mqtt.vacuum schema:state
 - changed states to satisfy HA requirements
+- new configuration supports send.command service in HA, use "robot:%command%" to invoke
 - add fan topic (still unreliable)
 - add `locate` command (doesn work in webUI) that beeps the vacuum 10 times when invoked
 - removed UDP, isn't useful
