@@ -13,6 +13,7 @@ void processCmdRequest() {
 
     SendIRCode(irbutton);
   }
+
   else {
     returnFail("INVALID COMMAND");
   }
@@ -30,7 +31,7 @@ void setupHTTP() {
   server.begin();
 
 //  MDNS.addService("http", "tcp", 80);
-  Serial.printf("[HTTP] HTTPUpdateServer ready! Open http://%s%s in your browser and login with username '%s' and password '%s'\n", WiFi.localIP().toString().c_str(), update_path, update_username, update_password);
+  Serial.printf("\n[HTTP] HTTPUpdateServer ready! Open http://%s%s in your browser and login with username '%s' and password '%s'\n", WiFi.localIP().toString().c_str(), update_path, update_username, update_password);
   Serial.println("");
   
   server.on("/", [](){

@@ -1,4 +1,18 @@
 # ILIFERobot
+All the hard work was done by https://github.com/ksya/ILIFERobot, I merely dabbled with the code at an extremely amateur level to add:
+
+- MQTT LWT topic for availability
+- add hostname definition
+- separate MQTT topics for state and status to use HA mqtt.vacuum schema:state
+- changed states to satisfy HA requirements
+- add fan topic (still unreliable)
+- add `locate` command (doesn work in webUI) that beeps the vacuum 10 times when invoked
+- removed UDP, isn't useful
+- add wifi signal quality function
+- calibrated battery reading
+- adjust "S_BUSY" to catch spot and edge clean modes
+- battery calculator uses my battery values
+- add charging boolean since state is now only "docked"
 
 Add WiFi capabilities to the ILIFE V5s using a NodeMCU or other ESP module. 
 Beware, this is not an easy project, since there is currently no known way to connect to a debug port or serial output.

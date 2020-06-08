@@ -4,7 +4,7 @@ const char PAGE_index[] PROGMEM = R"=====(
 <head>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 <meta name='viewport' content='width=device-width, user-scalable=no' />
-<title>ILIFE robot</title>
+<title>ILIFE V5s Pro</title>
 <script>function action(cmd) {
 document.getElementById('message').innerHTML = cmd;
 var xhttp = new XMLHttpRequest();
@@ -45,7 +45,7 @@ g{cursor: pointer;} g{user-select:none;-moz-user-select:none;} g.btn:active{opac
 </style>
 </head><body>
 <div id="main">
-<h1>ILIFE robot</h1>
+<h1>ILIFE V5s Pro</h1>
 <svg width='52.737mm' height='79.717mm' version='1.1' viewBox='0 0 109.62584 165.7103' xmlns='http://www.w3.org/2000/svg' xmlns:cc='http://creativecommons.org/ns#' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
 <metadata>
 <rdf:RDF>
@@ -95,7 +95,7 @@ g{cursor: pointer;} g{user-select:none;-moz-user-select:none;} g.btn:active{opac
 <path d='m161.04 955.45v3.8' fill='none' stroke='#fff' stroke-width='.8'/>
 <circle cx='161.04' cy='961.51' r='.75' fill='#fff'/>
 </g>
-<g class='btn' onclick="action('alarm')">
+<g class='btn' onclick="action('locate')">
 <rect x='7.9967' y='997.17' width='33.84' height='20.708' ry='1.8404' fill='#8ba9e6' stroke='#000' stroke-linejoin='round' stroke-width='1.5'/>
 <circle cx='24.917' cy='1007.5' r='5.665' fill='#8ba9e6' stroke='#fff' stroke-linejoin='round' stroke-width='.79993'/>
 <path d='m24.917 1001.4v12.255' fill='none' stroke='#8ba9e6' stroke-width='.87518px'/>
@@ -123,7 +123,7 @@ g{cursor: pointer;} g{user-select:none;-moz-user-select:none;} g.btn:active{opac
 <p id="message">-</p>
 
 <a class="pagebtn" href="/firmware">Upload new firmware</a>
-<a class="pagebtn" href="/settings">Settings</a>
+<a class="pagebtn" onclick="action('reboot')">Reboot ESP</a>
 </div>
 </body>
 </html>

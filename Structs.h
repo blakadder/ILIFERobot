@@ -3,6 +3,10 @@ typedef struct IRbutton {
   unsigned int signal[67];
 } IRbutton;
 
+typedef struct IRbutton_long {
+  const char* name;
+  unsigned int signal[99];
+} IRbutton_long;
 
 typedef struct PinTime {
   int pin;
@@ -35,6 +39,6 @@ enum Status {
   S_IDLE,
   S_BUSY,
   S_STUCK,
-  S_CHARGING,
+  S_DOCKED,
   S_GOING_HOME
 };

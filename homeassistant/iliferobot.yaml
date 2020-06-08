@@ -1,17 +1,38 @@
-group:
-  iliferobot:
-    name: ILIFE Robot
-    entities:
-    - vacuum.ilife_robot
-    - sensor.ilife_status
-    - sensor.ilife_battery
-    - sensor.tijd_schoongemaakt_vandaag
-    # - binary_sensor.ilife_docked
+- platform: mqtt
+  name: "ILIFE V5s Pro"
+  schema: state
+  availability_topic: "ilife-vacuum/LWT"
+  payload_available: 'online'
+  payload_not_available: 'offline'
+  supported_features:
+    - start
+    - stop
+    - return_home
+    - status
+    - clean_spot
+    - send_command
+    - battery
+    - locate
+    - send_command
+  command_topic: "ilife-vacuum/command"
+  state_topic: "ilife-vacuum/state"
+  send_command_topic: 'ilife-vacuum/command'
+ # set_fanspeed_topic: "ilife-vacuum/fan_speed"
+  payload_stop: 'robot:stop'
+  payload_start: 'robot:start'
+  payload_return_to_base: 'robot:home'
+  payload_locate: 'robot:locate'
+  payload_clean_spot: 'robot:spot'
+  json_attributes_topic: 'ilife-vacuum/status'
+  json_attributes_template: "{{ value_json | tojson }}"
+  retain: false
 
+
+## old version sensors
 sensor:
 - platform: mqtt
   name: ILIFE status mqtt
-  state_topic: "ILIFERobot/state"
+  state_topic: "ilife-vacuum/state"
   value_template: '{{ value_json.state }}'
 - platform: template
   sensors:
@@ -25,26 +46,19 @@ sensor:
         {% endif %}
 - platform: mqtt
   name: ILIFE battery
-  state_topic: "ILIFERobot/state"
+  state_topic: "ilife-vacuum/state"
   value_template: '{{ value_json.battery_level }}'
   unit_of_measurement: '%'
-  icon: >-
-    {% if states('sensor.ilife_battery') >= 95 %}
-      mdi:battery
-    {% elif states('sensor.ilife_battery') < 5 %}
-      mdi:battery-outline
-    {% else %}
-      mdi:battery-{{ ((states('sensor.ilife_battery') | float / 10) | round(0)) | int * 10 }}
-    {% endif %}
+  device_class: battery
 - platform: mqtt
   name: ILIFE battery voltage
-  state_topic: "ILIFERobot/state"
+  state_topic: "ilife-vacuum/state"
   value_template: '{{ value_json.battery_voltage }}'
   unit_of_measurement: V
 - platform: mqtt
   name: ILIFE boottime
-  state_topic: "ILIFERobot/state"
-  value_template: '{{ value_json.boottime | timestamp_local }}'
+  state_topic: "ilife-vacuum/state"
+  value_template: '{{ value_json.boottime | timestamp_custom("%d/%m/%y %H:%M") }}'
 - platform: history_stats
   name: Tijd schoongemaakt vandaag
   entity_id: sensor.ilife_status
@@ -57,38 +71,8 @@ sensor:
 binary_sensor:
 - platform: mqtt
   name: ILIFE docked
-  state_topic: "ILIFERobot/state"
+  state_topic: "ilife-vacuum/state"
   value_template: '{{ value_json.docked }}'
   device_class: occupancy
   payload_on: true
   payload_off: false
-
-vacuum:
-- platform: mqtt
-  name: "ILIFE Robot"
-  retain: false
-  supported_features:
-    - turn_on
-    - turn_off
-    - stop
-    - return_home
-    - status
-    - clean_spot
-    - send_command
-    - battery
-  payload_turn_on: 'robot:start'
-  payload_turn_off: 'robot:stop'
-  payload_stop: 'robot:stop'
-  payload_start_pause: 'robot:start_pause'
-  payload_return_to_base: 'robot:home'
-  payload_clean_spot: 'robot:spot'
-  command_topic: "ILIFERobot/command"
-  battery_level_topic: "ILIFERobot/state"
-  battery_level_template: "{{ value_json.battery_level }}"
-  docked_topic: "ILIFERobot/state"
-  docked_template: '{{ value_json.docked }}'
-  charging_topic: "ILIFERobot/state"
-  charging_template: '{{ value_json.charging }}'
-  cleaning_topic: "ILIFERobot/state"
-  cleaning_template: '{{ value_json.cleaning }}'
-  send_command_topic: 'ILIFERobot/command'
