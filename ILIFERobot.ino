@@ -459,10 +459,10 @@ boolean doAction(const char* action) {
   }
   else if(strcmp(action, "start") == 0) {
     Serial.println("start");
-    if(robotStatus == S_IDLE || robotStatus == S_GOING_HOME || robotStatus == S_DOCKED ) {
+    if(robotStatus == S_IDLE || robotStatus == S_GOING_HOME || robotStatus == S_DOCKED and isCharging() ) {
       SendIRCode(rStart);
     }
-    else if(robotStatus == S_SLEEP || robotStatus == S_DOCKED and !isCharging() ) {
+    else if(robotStatus == S_SLEEP || robotStatus == S_DOCKED  ) {
       SendIRCode(rStart); //wake up first
       delay(1000); //wait a bit
       SendIRCode(rStart); //now it will start
